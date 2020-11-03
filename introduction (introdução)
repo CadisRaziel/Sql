@@ -1,0 +1,12 @@
+SGBD = Sistema de gestão de banco de dados | Conjunto de aplicações e biblioteca de funções | Sistema usado para comunicar ou ter acesso a estrutura de ficheiros aonde esta guardada a informação
+Permite inserir, editar e eliminar dados.
+
+SGBD mais famosos..
+Microsoft SQL server
+Oracle database
+IBM DB2
+SAP sybase ASE
+Postgre SQL
+MySql
+Sqlite
+SQL server CE
