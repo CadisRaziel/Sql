@@ -1,0 +1,14 @@
+Baixamos o programa DATABASE.NET (database4)
+
+a variavel string não tem, porém tem o "nvarchar" que é string ! 
+
+nvarchar = string
+null = se vai aceitar registros vazios (o normal é nao selecionar)
+datatype(Lenght) = quantidade de caracteres a variavel nome vai aceitar
+
+mostrar tudo = SELECT * FROM (selecionar *(tudo) from)
+substituir o nome de alguem = UPDATE contato SET nome = 'Rosana' WHERE nome = 'Novo nome'  (primeiro o nome que vai substituir depois o nome que ja existe)
+deletar = DELETE FROM contato WHERE nome = 'Rosana' (o nome tem que ser exatamente igual !!!)
+adicionar = INSET INTO contato VALUES = ('Novo nome','125454')
+procurar nome = SELECT * FROM contato WHERE 'Vitor'
+procurar contato ou numero = SELECT nome FROM contato / SELECT numero FROM contato
