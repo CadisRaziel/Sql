@@ -1,0 +1,52 @@
+Criamos uma conexão com a database.net 
+Criamos um operario para executar tarefas para nós
+
+foi utilizado 1 label e 1 botão
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlServerCe;  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<, sempre colocar !!!!!!
+using System.Windows.Forms;
+
+namespace TesteBancoDados
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent(); 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //conectar a base de dados
+            SqlCeConnection connection = new SqlCeConnection(); // para conectar na databse
+            connection.ConnectionString = @"Data source = C:\source\repos\teste.sdf";
+            connection.Open();// para abrir a conexão
+            //label_resultado.Text = "Conexão online"; para verificar se deu certo
+            SqlCeDataAdapter adptador = new SqlCeDataAdapter("SELECT * FROM Filmes", connection); // ele que vai enviar dados, pegar dados etc...
+            DataTable dados = new DataTable();
+            adptador.Fill(dados); // fill = preencher a tabela
+            //a cima criamos o adptador (ele vai ser nosso empregado) pedimos a ele para conectar a tabela Filmes
+            //ele é quem vai criar, excluir, editar etc... e nós que vamos dar esses comandos
+            //como pode ver tudo é criando objetos.
+            connection.Close(); // para fechar a conexão
+
+            label_resultado.Text = dados.Rows.Count.ToString(); // para mostrar as linhas que existe na tabela, usado para ver se deu certo !!
+
+
+
+        }
+    }
+}
