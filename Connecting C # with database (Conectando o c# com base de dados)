@@ -1,0 +1,68 @@
+
+Criamos no Database4 a pasta filmes e incluimos 3 titulo de filmes com diretor e ano
+Com o c# vamos conectar a base de dados e mostrar numa listbox os itens criados na database4
+
+itens usados 1 litsbox, 1 botão
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlServerCe;
+using System.Windows.Forms;
+
+namespace TesteBancoDados2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btn_conectar_Click(object sender, EventArgs e)
+        {
+            //ligar a base de dados
+            SqlCeConnection conectar = new SqlCeConnection(@"Data source = C:\source\repos\teste.sdf");
+            // posso colocar aqui assim: conectar.ConnectionString = ""; ou coloco ali em cima daquela forma /\
+            conectar.Open();
+
+            //pegar dados(executar o database)
+            DataTable tabela = new DataTable();
+            SqlCeDataAdapter operario = new SqlCeDataAdapter("SELECT * FROM Filmes", conectar);
+            operario.Fill(tabela);
+
+            //fechar a base de dados
+            conectar.Close();
+
+            //apresentar resultados
+            foreach (DataRow linha in tabela.Rows)
+            {
+                lista_dados.Items.Add(linha["Titulo"].ToString() + " - " 
+                    + linha["Diretor"].ToString() + " - " 
+                    + linha["Ano"].ToString());
+            }
+
+
+
+
+            //DataRow linha = tabela.Rows[0]; //DataRow é somente linha | DataTable é linha e coluna
+            //(linha["Diretor"].ToString()); = aqui como eu defini a linha a cima, é só por a coluna
+            //DataRow é usado para definir a linha com mais facilidade
+            //mais o correto é usa o Datatable que é mais facil
+            
+            //------------------------------------------------
+            
+            //tabela.Rows[0]["Diretor"]
+            //tabela.Rows[0]["Diretor"] o primeiro [0] é a linha o segundo [] é a coluna
+            //então eu posso definir linha [0] coluna ["Diretor"] ou coluna [2]
+            //na linha eu nao posso por string, mais na coluna sim !
+
+
+        }
+    }
+}
