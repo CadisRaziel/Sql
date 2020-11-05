@@ -1,0 +1,88 @@
+Aqui vamos ver como evitar que o sistema crash, e se crashar ele aparece uma mensagem de erro mais não feche o programa
+
+usado 1 botão, 1 list box, 1 textbox
+
+comando para evitar erros Try e Cath !! nunca se esqueça
+
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlServerCe;
+using System.Windows.Forms;
+
+namespace TesteBancoDados3
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btn_conectar_Click(object sender, EventArgs e)
+        {
+            //buscar os dados da tabela no database4
+            try
+            {
+                //SqlCeConnection conectar = new SqlCeConnection();
+                //conectar.ConnectionString = @"Data source = C:\source\repos\dados.sdf";
+                //conectar.Open();
+
+                // aqui eu vou definir uma pesquisa com o text box
+                //como o nome do banco de dados é "dados" sempre que eu colocar dados no textbox ele vai apresentar o resutlado
+                SqlCeConnection conectar = new SqlCeConnection();
+                conectar.ConnectionString = @"Data source = C:\source\repos\" + test_bd.Text + ".sdf";
+                conectar.Open();
+
+                //buscar os dados
+                DataTable dados = new DataTable();
+                SqlCeDataAdapter operario = new SqlCeDataAdapter("SELECT * FROM pessoas", conectar);
+                operario.Fill(dados); // aqui eu vou dizer que quero preencher a datatable
+
+                //apresentar os dados
+                lista_dados.Items.Clear();
+                foreach (DataRow linha in dados.Rows)
+                {
+                    lista_dados.Items.Add(linha["nome"].ToString() + " - " +
+                                        linha["morada"].ToString() + " - " +
+                                        linha["telefone"].ToString());
+
+                }
+            }
+
+            catch
+            {
+                lista_dados.Items.Clear();
+                MessageBox.Show("Ocorreu um erro");
+            }
+
+        }
+
+
+        // o try vai executar o código, caso der erro o c# vai encaminhar o código para o catch
+        // então o catch vai fazer o código alternativo rodar
+        // é muito utilizado para evitar erros
+        // sempre usar !
+
+        //try
+        //{
+        //}
+
+        //catch 
+        //{                
+        //}
+    
+
+    }
+
+    
+
+}
+
+
