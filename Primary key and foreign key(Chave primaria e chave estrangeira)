@@ -1,0 +1,33 @@
+Como fazer duas tabelas se comunicarem entre elas \/
+
+
+ABRIR O DATABASE4 E OLHAR O SQLCE "LOJA.SDF"
+
+Criamos a tabela CLIENTES e COMPRAS
+e inserimos alguns dados nelas
+
+Cliente = id_cliente \ nome \ telefone
+Compras = id_compra \ id_cliente \ produto \ quantidade \ preço_unidade \ data_compra 
+
+e criamos as chaves primarias e chaves estrangeiras como o exemplo abaixo
+
+
+
+//primeiro criamos a tabala cliente e definimos o id_cliente como chave primaria
+//depois criamos a tabela compra e definimos o id_compras como chave primaria
+//em seguida definimos id_cliente na tabela de compras como uma chave estrangeira, para assim as duas tabelas se comunicarem
+
+//para colocar uma chave primaria eu clico com o botão direito em cima de "comprar" ou "cliente" e coloco em "Design"
+//em seguida eu clico no "id_compra" e clico na chave dourada em cima, automaticamente vai estar criada minha chave primaria
+
+//para eu fazer a tabela de compra comunicar com a cliente, é necessario fazer uma chave estrangeira
+//para fazer clique em "comprar" com o botão direito e vá em "design"
+//em seguida clique em cima do "id_cliente" e clique na chave prata
+//vai abrir uma tabela com os itens criados dentro do "compras" e la voce clica em id_cliente
+
+//logo abaixo selecione "clientes" e o "id_cliente" como chave primaria
+//logo abaixo tem "update Rule" e "delete Rule"
+//Update rule = é para atualizar a lista de clientes, porém não é necessario então colocamos "NO ACTION"
+//Delete rule = serve para a lista de compras, pois ao deletar um id_cliente ele vai deletar todas as compras do cliente, então selecionamos "CASCADE"
+
+//aperte ok no final e salve
