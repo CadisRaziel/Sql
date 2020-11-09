@@ -1,0 +1,15 @@
+SELECT produto FROM compras = para mostrar somente os produtos
+SELECT produto,data FROM compras = para mostrar produto e data
+não precisa por na ordem tipo produto e depois data, posso colocar primeiro data e depois produto
+e assim podemos escolher o que queremos mostrar na tabela de compras 
+
+
+SELECT * FROM compras WHERE id_cliente = 1 //= isso é para procurar algo especifico, ai utilizo o WHERE
+
+
+quando eu coloco um nome com espaço
+exemplo
+crio a tabela teste
+e coloco uma instruçao na lista com o nome 'novo teste' com espaço
+na hora de procurar eu preciso colocar assim
+SELECET [novo teste] FROM teste = repare como tive que colocar [] por conta do espaço que tem !!!
