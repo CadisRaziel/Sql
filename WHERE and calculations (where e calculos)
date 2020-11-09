@@ -1,0 +1,60 @@
+Lembrando que são exemplos da tabela criada no DATABASE4 "loja.SDF"
+
+/**/ = coloca comentario no SQL
+SINAL DE DIFERENTE NO SQL = <>
+
+SINAL DE MAIOR PARA NUMEROS = > 
+SINAL DE MENOR PARA NUMEROS = <
+
+SINAL DE MENOR OU IGUAL PARA NUMEROS = <=
+SINAL DE MAIOR OU IGUAL PARA NUMEROS = >=
+
+
+
+tabelas CLIENTES
+-----------------------------------------------------------------------------------------------------
+para procurar um nome em especifico 
+SELECT * FROM clientes WHERE nome = 'Joao Ribeiro'  // o nome deve ser igual
+-----------------------------------------------------------------------------------------------------
+para procurar nome e telefone
+SELECT nome, telefone FROM clientes WHERE nome = 'Rosana'
+-----------------------------------------------------------------------------------------------------
+para procurar pelo id_cliente
+SELECT nome, telefone FROM clientes WHERE id_cliente = 6
+EM ALGUNS BANCOS DE DADO ESSE COMANDO ACIMA NÂO È POSSIVEL !!
+-----------------------------------------------------------------------------------------------------
+para procurar um cliente que seja diferente do id_cliente 6 ou diferente do nome 
+SELECT * FROM clientes WHERE id_cliente <> 6
+SELECT * FROM clientes WHERE nome <> 'Vitor'
+vai aparecer todos os clientes diferetente do 6 ou se tivese um nome como Joao diferente do nome Joao
+-----------------------------------------------------------------------------------------------------
+para procurar os clientes menores que o id_cliente 4
+SELECT * FROM clientes WHERE id_cliente < 4
+
+para procurar os clientes maiores que o id_cliente 4
+SELECT * FROM clientes WHERE id_cliente > 4
+-----------------------------------------------------------------------------------------------------
+para procurar os clientes menores ou iguais que o id_cliente 4
+SELECT * FROM clientes WHERE id_cliente < =4
+
+para procurar os clientes maiores ou iguais que o id_cliente 4
+SELECT * FROM clientes WHERE id_cliente > =4
+-----------------------------------------------------------------------------------------------------
+
+
+
+
+tabela COMPRAS
+-----------------------------------------------------------------------------------------------------
+para procurar produtos vendidos com o preço maior ou igual que 2
+SELECT * FROM compras WHERE preço_unidade >=2
+-----------------------------------------------------------------------------------------------------
+para procurar a quantidade de produtos vendidos igual ou maior que 3
+SELECT * FROM compras WHERE quantidade >=3
+-----------------------------------------------------------------------------------------------------
+para procurar quais clientes gastaram mais do que 5 reais
+SELECT * FROM compras WHERE quantidade*preço_unidade >=5
+
+
+
+
