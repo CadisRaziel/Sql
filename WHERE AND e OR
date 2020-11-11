@@ -1,0 +1,25 @@
+aqui vamos utilizar o WHERE com AND e OR
+
+AND = Uma ou outra condição
+OR = Uma ou outra circustancia 
+
+------------------------------------------------------------------------------------
+
+exemplo OR
+
+SELECT * FROM compras WHERE produto = 'Leite' or produto = 'Coca'
+(selecionar tudo de compras do produto leite OU coca
+
+------------------------------------------------------------------------------------
+
+exemplo AND
+
+SELECT * FROM compras WHERE produto = 'Coxinha' and quantidade >= 5
+(Selecionar tudo de compras do produto = 'coxinha' E quantidade >=5
+ou seja selecionamos toda a lista de compras e procuramos somente o produto "Coxinha" e perguntamos quais compras foram maior ou igual que 5
+
+------------------------------------------------------------------------------------
+
+exemplo de AND e OR juntos (sempre colocar parenteses para separa-los)
+
+SELECT * FROM compras WHERE (produto = 'Coxinha' and quantidade >= 5) or (produto = 'Coca' and quantidade >=1)
