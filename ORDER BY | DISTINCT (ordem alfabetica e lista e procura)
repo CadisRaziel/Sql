@@ -1,0 +1,34 @@
+ORDER BY = Fazer a lista ficar em ordem alfabetica por exemplo
+
+ASC = ASCENDENTE ! 
+
+Exemplo organizar a lista com os nomes em ordem alfabetica
+SELECT * FROM clientes ORDER BY nome ASC
+
+Outro exemplo de ordem alfabetica é se eu querer que os ID_cliente seja Maior que 5 e estao ordenados em lista alfabetica 
+SELECT * FROM clientes WHERE id_cliente >5 ORDER BY nome ASC
+
+Outro exemplo é saber o menor preço
+SELECT * FROM compras ORDER BY preço_unidade ASC
+
+Ou saber o maior preço
+SELECT * FROM compras ORDER BY preço_unidade DESC
+
+
+
+
+DESC = DESCENDENTE
+
+Exemplo invertemos a lista de ordem alfabetica entao começa pelo Z ou pelo numero
+SELECT * FROM clientes ORDER BY nome DESC
+
+
+----------------------------------------------------------------------------
+DISTINCT = mostra todos e somente os PRODUTOS comprados na lista pelo cliente
+
+exemplo
+SELECT DISTINCT produto FROM compras
+
+Exemplo POSSO COLOAR AINDA EM ORDEM ALFABETICA
+SELECT DISTINCT produto FROM compras ORDER BY produto ASC
+
