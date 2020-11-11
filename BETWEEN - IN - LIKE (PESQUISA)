@@ -1,0 +1,59 @@
+BETWENN = ENTRE (exemplo entre o valor 3 e o valor 2)  (ele é bom para pesquisa de valores numericos)
+exemplo2
+
+SEM O BETWEEN
+/* SELECT * FROM clientes WHERE id_cliente  >=3 and id_cliente <=5 */ ----- poderiamos fazer assim
+
+COM O BETWEEN
+SELECT * FROM clientes WHERE id_cliente BETWEEN 3 and 5 ------- porém assim é mais facil e mais simplificado !!
+
+exemplo3
+
+COM O BETWEEN
+SELECT * FROM compras WHERE quantidade BETWEEN 1 and 5
+
+----------------------------------------------------------------------------------------------------------------
+
+IN = Me permite buscar determinados valores dentro de uma listagem
+
+SEM O IN
+SELECT * FROM compras WHERE id_compra = 2 or id_compra = 4 or id_compra = 6  ------ eu poderia procurar os clientes assim e o código ficaria enorme
+
+COM O IN
+SELECT * FROM compras WHERE id_compra IN (2,4,6) --- repare que com o IN fica bem mais abreviado e tem a mesma função do código acima /\
+
+POSSO TAMBEM COLOCAR COM STRING
+SELECT * FROM compras WHERE produto IN ('Coca', 'Coxinha')
+
+EXEMPLO COM IN e AND
+SELECT * FROM compras WHERE produto IN ('Coca', 'Coxinha') and id_compra >2
+
+----------------------------------------------------------------------------------------------------------------
+
+LIKE = é utlizado em pesquisa mais avançadas como quero saber o nome dos clientes que começa com a letra "V"
+
+EXEMOPLO BUSCANDO O NOME DOS CLIENTES QUE TEM A LETRA "V" no inicio do nome
+SELECT * FROM clientes WHERE nome LIKE 'V%' ----- o % é para ele saber que tem que procurar um nome que começe com a letra V e que tenha o restante com "ITOR
+
+EXEMPLO BUSCANDO O NOME DOS CLIENTES QUE TEM A LETRA "A" no final do nome
+SELECT * FROM clientes WHERE nome LIKE '%A' ----- repare que o % vai indicar inicio do nome ou fim do nome
+
+%V - letra inicio do nome
+%R - letra fim do nome
+
+EXEMPLO BUSCANDO O SOBRENOME DOS CLIENTES OU NOMES COMPOSTOS
+SELECT * FROM clientes WHERE nome LIKE '%Zerbato'
+SELECT * FROM clientes WHERE nome LIKE '%Costa'
+
+EXEMPLO IMAGINA QUE EU QUERO SABER QUAIS PRODUTOS TEM A LETRA "AN" EM SEU INTERIOR
+SELECT * FROM compras WHERE produto LIKE '%an%' ----- para saber letras que tem no interior de um nome tem que colocar % no inicio e % no final
+
+
+EXEMPLO DE SUBSTICUIÇÂO DE LETRA
+IMAGINE A SEGUINTE SITUAÇÂO EU QUERO PESQUISAR UMA PALAVRA QUE TENHA PE_A "PE" no incio e "A" no final, essa palavra pode ser PERA, PEIA, PELA, PERA o "_" vai sendo subistituido
+SELECT * FROM compras WHERE produto LIKE 'pe_a'
+
+
+EXEMPLO DE PESQUISA DE NOME
+SELECT * FROM clientes WHERE nome LIKE '%Vitor%' or nome LIKE '%ROSANA%' ---- aqui ele vai pesquisar qualquer nome que tenha Vitor ou qualquer nome que tenha ROSANA
+
