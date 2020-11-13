@@ -1,0 +1,26 @@
+Não são exatamente necessarias as ALIAS porém pode trazer beneficios
+
+posso escrever tabelas e colunas com o nome que eu quizer
+
+imagine assim eu tenho as colunas
+id_cliente   nome   telefone
+
+e quero deixar ela com outro nome na hora de apresentar tipo, vou subistituir o NOME por PRIMEIRO na hora de apresenta-la
+SELECT nome as PRIMEIRO FROM clientes
+as = ALIAS
+
+Se na hora de criar a DATATABLE no c# e apresentar um banco de dados com ALIAS igual a cima, a DATATABLE vai apresentar o nome que esta no ALIAS !!
+exemplo > SELECT nome as PRIMEIRO FROM clientes ---- vai aparecer PRIMEIRO ao invez de NOME
+
+
+
+podemos tambem colocar o nome da tabela que é clientes para primeiro
+SELECT * FROM clientes AS primeiro
+o resultado que ao eu incluir no c# ele vai poder responder como PRIMEIRO 
+
+
+PARA JUNTAS AS DUAS TABELAS E FAZER PESQUISA NELAS ALTERANDO O NOME DA COLUNA 
+SELECT c.*, d.* FROM clientes c, COMPRAS d WHERE c.nome = 'Vitor' AND d.produto = 'Bolo'
+OU
+SEM ALIAS
+SELECT clientes.*, compras.* FROM clientes , COMPRAS  WHERE clientes.nome = 'Vitor' AND compras.produto = 'Bolo'
