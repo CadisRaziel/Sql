@@ -1,0 +1,30 @@
+TOP = me permite buscar um determinado numero de linhas (exemplo aparecer somente os primeiros 4 clientes)
+
+SELECT TOP (4) * FROM clientes ( vai aparecer o 0,1,2,3 )
+
+Para mostrar do ultimo até o primeiro com ORDER BY
+SELECT TOP (4) * FROM clientes ORDER BY id_cliente DESC ( vai aparecer 8,7,6,5 do ultimo até o primeiro ) pois eu defini só (4)
+
+pode ser combinada com WHERE, BETWEEN, IN...etc.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+MAX = permite determinar valor maximo
+MIN = permite determinar o valor minimo
+(usado para saber a quantidade maxima ou minima de produtos comprados, exemplo)
+
+exemplo de MAX
+SELECT MAX (quantidade) as quantidade FROM compras (note que coloquei "AS QUANTIDADE", isso é para que o nome quantidade apareça na coluna, se eu nao colocar vai mostrar só "COLUNA1")
+
+exemplo de MAX
+SELECT MAX (quantidade) as quantidade FROM compras WHERE produto = 'Coxinha' (para saber a maior quantidade de coxinha que um cliente comprou)
+
+
+
+
+exemplo de MIN
+SELECT MIN (quantidade) as quantidade FROM compras
+
+exemplo de MIN
+SELECT MIN (quantidade) as quantidade FROM compras WHERE produto = 'Coxinha' (para saber a menor quantidade de coxinha que um cliente comprou)
