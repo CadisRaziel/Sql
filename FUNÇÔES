@@ -1,0 +1,60 @@
+Funções que nos permitem obter medias, somatorias, contagem etc... (função pré concebidas)
+
+Exemplo para saber qual a média de quantidade(unidades) que são comprada pelos clientes
+SELECT AVG(quantidade) FROM compras ----- Repare que coloquei AVG ele serve para dar uma media dos protudos 
+vai aparecer uma coluna com o numero ( suponhamos que apareça 8, vai ser 8 a média de produtos comprados por cada cliente)
+
+
+Exemplo para saber qual a media de quantidade entre dois clientes
+SELECT AVG(quantidade) FROM compras WHERE id_compra >= 4 and id_compra <=5
+OU USAR O BETWEEN
+SELECT AVG(quantidade) FROM compras WHERE id_compra BETWEEN 4 and 5 ---- JEITO MAIS CORRETO
+OU USAR O IN
+SELECT AVG(quantidade) FROM compras WHERE id_compra IN (4,5)
+
+
+Suponhamos que ao invez de querer que apareça "COLUNA" e sim "MÈDIA" usar o ALIAS como abaixo
+SELECT AVG(quantidade) as média FROM compras WHERE id_compra IN (4,5)
+Use o AVG
+OBS: Se não usar o ALIAS o nome da coluna vai ser apenas "COLUNA" (questão de estetica e facilidade)
+
+
+----------------------------------------------------------------------------------------------
+Suponhamos que quero saber a quantidade de clientes que comprou na loja
+SELECT COUNT(id_cliente) AS total FROM compras ---- Vai aparecer a quantidade de linhas na coluna !!
+Use o COUNT
+
+----------------------------------------------------------------------------------------------
+Suponhamos que quero saber a quantidade de produtos vendido ao total na loja
+SELECT SUM(quantidade) AS [total produtos] FROM compras -------- Repare que o [] é usado para palavras com espaço para não ocorrer erro
+Use o SUM
+
+----------------------------------------------------------------------------------------------
+Suponhamos que quero saber o total do preço por unidade
+SELECT SUM(preço_unidade) AS [total preços] FROM compras
+Use o SUM
+
+----------------------------------------------------------------------------------------------
+Suponhamos que quero saber o total de dinheiro que ganhamos em todas as compras
+SELECT SUM(quantidade * preço_unidade) AS total FROM compras
+Use o SUM
+
+----------------------------------------------------------------------------------------------
+Suponhamos que quero saber quanto gasta cada cliente em média na loja
+SELECT AVG(quantidade * preço_unidade) AS [media] FROM compras
+Use o AVG
+
+----------------------------------------------------------------------------------------------
+Suponhamos que quero saber a compra que ganhamos menos dinheiro
+SELECT MIN(quantidade * preço_unidade) AS [minimo] FROM compras
+Use o MIN
+
+----------------------------------------------------------------------------------------------
+Suponhamos que quero saber a compra que ganhamos mais dinheiro
+SELECT MAX(quantidade * preço_unidade) AS m[aximo] FROM compras
+Use o Max
+
+
+OBS SEMPRE USAR [] Nas palavras após o AS !!
+
+
