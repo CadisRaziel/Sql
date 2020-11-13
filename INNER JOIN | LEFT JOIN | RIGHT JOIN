@@ -1,0 +1,32 @@
+INNER JOIN = Juntar todas as linhas da tabela da esquerda com as da tabela da direita desde que existam dados que obdeçam a clausula
+LEFT JOIN = Juntar os dados da tabela da esquerda os relacionados na tabela da direita
+RIGHT JOIN = Juntar os dados da tabela da direita os relacionados na tabela da esquerda
+
+
+INNER JOIN
+SELECT * FROM clientes INNER JOIN compras ON clientes.id_cliente = compras.id_cliente ----- Repare como eu coloquei o termo ON
+nesse comando acontece uma junção das duas tabelas que tem o cliente e compras
+(selecionar tudo de clientes juntando a combra desde que cliete.id_cliente seja igual compras.id_cliente para mostrar as duas
+
+Outro exemplo de INNER JOIN só que para mostrar os id_compra(compras) menor que 5
+
+SELECT * FROM clientes INNER JOIN compras ON clientes.id_cliente = compras.id_cliente WHERE compras.id_compra < 5
+aqui vamos juntar as duas tabelas como acima porém para que mostre somente os id_compra menor que 5$
+
+Outro exemplo de INNER JOIN só que para mostrar os id_compra(compras) do cliente 8
+SELECT * FROM clientes INNER JOIN compras on clientes.id_cliente = compras.id_cliente WHERE clientes.id_cliente = 8
+
+
+-------------------------------------------------------------------------------------------------------------------------
+LEFT JOIN
+
+Exemplo de LEFT JOIN para mostrar as duas tabelas porém se o cliente não tiver compra vai aparecer os dados da tabela compra como NULL
+SELECT * FROM clientes LEFT JOIN compras ON clientes.id_cliente = compras.id_cliente WHERE clientes.id_cliente = 4
+
+--------------------------------------------------------------------------------------------------------------------------
+RIGHT JOIN
+
+Exemplo de RIGHT JOIN para mostrar as duas tabelas porém se o cliente não tiver compra vai aparecer os dados da tabela compra como NULL
+SELECT * FROM clientes RIGHT JOIN compras ON compras.id_cliente = clientes.id_cliente WHERE clientes.id_cliente = 4
+
+Os exemplos LEFT e RIGHT ficaram um pouco confusos, pesquisar mais afundo ! 
