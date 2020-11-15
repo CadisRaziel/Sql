@@ -1,0 +1,38 @@
+Criaremos uma tabela de encomendas para se comunicar com a tabela clientes
+e quando um cliente for deletado, tudo dele vai ser apagado da tabela encomendas
+itens a serem criados\/
+/*Encomendas
+id_encomenda (Chave primaria) int
+id_cliente (chave estrangeira) int
+produto string
+quantidade int
+data da encomenda data
+executado bool
+*/
+
+CREATE TABLE encomendas
+(
+	id_encomenda			int NOT NULL PRIMARY KEY,  
+	id_cliente				int NOT NULL, 
+	produto					  nvarchar(50),
+	quantidade				int,
+	data_encomenda		datetime,
+	executado         bit, //para saber se é a encomenda esta sendo feita ou não (verdadeira ou falso)
+	FOREIGN KEY(id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE // a chave estrangeira é criada para se comunicar com a tabela cliente, por isso a REFERENCE clientes, caso o cliente seja deletado tudo é apagado por isso DELETE CASCADE
+)
+
+OBSERVAÇÂO, MUITO CUIDADO AO POR O NOME DAS TABELAS, PRECISAM SER IGUAIS, E SEMPRE LEIA O ERRO ELE MOSTRA AONDE ESTA ERRADO 
+
+
+
+------------------------------------------------------------------------------------------------------
+UTILIZANDO LEFT JOIN PARA SABER QUAL CLIENTE FEZ A ENCOMENDA
+SELECT * FROM clientes left join encomendas on clientes.id_cliente = encomendas.id_cliente WHERE clientes.id_cliente = 0
+Procuramos do id_cliente "0"
+
+SE CASO NÃO COLOCAR LEFT JOIN ELE NÃO APARECE O CLIENTE QUE FEZ
+SELECT * FROM encomendas
+
+
+
+SITE PARA APRENDIZADO MUITO BOM https://www.w3schools.com
