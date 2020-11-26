@@ -1,0 +1,13 @@
+Portabilidade do SQLserverCE para um computador (de cliente) que não possui o SQLserverCE
+imagine que o pc do cliente não possua as funcionalidades necessarias para rodar o sql... então teremos que ter alternativas para isso
+
+
+
+o que fazer : na pasta onde se encontra a aplicação (ou seja no c:\sourc...) devemos abrir a pasta (exemplo AgendaSQL) ir em "bin" e depois em "debug" e copiar e colar todos os
+arquivors .dll que esta na pasta (arquivos de progama x86, depois clicar na pasta "Microsoft SQL server compact edition" e copiar os 8 arquivos .dll que esta dentro da pasta "v4")
+
+em seguida va na aplicação em desenvolvimento no visual studio e remova a referencia da data base das referencias e depois adicione denovo só que procure ela dentro da pasta
+"debug" do arquivo criado (exemplo AgendaSQL, bin, debug e la selecione o arquivo System.Data.SqlServerCE.dll)
+
+e pronto, na hora que a pessoa que fazer o download do programa e clicar no executavel automaticamente ele vai conter todas dll necessaria para rodar o programa
+mesmo que o cliente não tenha SQLserverCE em seu computador.
