@@ -1,0 +1,5 @@
+O SQL Server é executado como um serviço, enquanto o SQL Server Compact é um banco de dados embutido no mesmo local físico que o aplicativo. O SQL Server Compact destina-se a um aplicativo autônomo e não deve ser compartilhado entre muitos usuários ou em situações onde há muitos acessos simultâneos, como em um site.
+
+O SQL Server é executado como um serviço e escuta as solicitações em uma porta. Você pode ter várias conexões simultâneas com seu uso e ele atua como um gatekeeper, verificando as permissões das conexões de entrada. Destina-se a grupos de trabalho e empresas, e não se destina (exagero) a aplicativos de usuário único / computador único.
+
+O SQL Server Express é a edição gratuita do SQL Server completo e possui certas limitações, como o tamanho máximo do banco de dados de 10 GB, entre outras. O SQL Server Standard é como a edição completa. Existem também as edições Enterprise, Datacenter e Developer.
