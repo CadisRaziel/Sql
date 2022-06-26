@@ -1,0 +1,31 @@
+//apresentando tudo que tiver na tabela usuarios
+SELECT * FROM usuarios;
+
+//apresentando nome e email da tabela usuarios
+SELECT nome, email FROM usuarios;
+
+
+//inserindo um novo usuario na mão
+INSERT INTO usuarios (nome, email, password) VALUES ('1', 'Vitor@gmail.com', '1234');
+INSERT INTO usuarios (nome, email, password) VALUES ('dylan', 'dylan@gmail.com', '4321');
+
+
+//buscando um usuario pelo id
+SELECT * FROM usuarios WHERE id = 2;
+
+
+//buscando um usuario pelo id e pelo nome (os dois precisam estar corretos)
+SELECT * FROM usuarios WHERE id = 2 and nome = 'dylan';
+
+
+//buscando um usuario pelo id se nao tiver ele busca pelo nome (somente um precisa estar correto)
+SELECT * FROM usuarios WHERE id = 2 or nome = 'XPTO';
+
+//atualizando o nome de um usuario (nao esqueca de por o 'WHERE' para ele encontrar o id correto)
+UPDATE usuarios set nome = 'Vitor Brussolo Zerbato' WHERE id = 1
+
+//atualizando nome e password de um usuario (nao esqueca o WHERE especificando o id)
+UPDATE usuarios set nome = 'Vitor Brussolo Zerbato', password = 'ola' WHERE id = 1;
+
+//deletando o usuario pelo id
+DELETE from usuarios WHERE id = 1;
