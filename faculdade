@@ -1,0 +1,477 @@
+//----------------------------  AULA 1 ------------------------\\
+CREATE TABLE jogador (
+    id_jogador NUMBER(10,0) NOT NULL,
+    nome VARCHAR2(100) NOT NULL,
+    posicao VARCHAR2(100) NOT NULL,
+    bi VARCHAR2(100),
+    CONSTRAINT pk_jogador PRIMARY KEY (id_jogador);
+);
+
+CONSTRAINT -> cria regras
+VARCHAR2 -> como se fosse 'text'
+//----------------------------
+
+
+//----------------------------------------
+CREATE TABLE contratado (
+    id_jogador NUMBER(10,0) NOT NULL
+    data_inicio DATE NOT NULL,
+    data_fim DATE NOT NULL,
+    CONSTRAINT pk_contratado PRIMARY KEY(id_jogador, data_inicio)
+    CONSTRAINT fk_contratado_ref_jogador FOREIGN KEY (id_jogador)
+      REFERENCES jogador(id_jogador),
+    CONSTRAINT ck_contratado CHECK (data_fim > data_inicio)
+); 
+
+CONSTRAINT pk_contratado PRIMARY KEY(id_jogador, data_inicio) -> chave composta com 2 atributos
+com isso criamos uma regra: eu nao posso ter o mesmo jogador contratado com o mesmo inicio
+
+CONSTRAINT fk_contratado_ref_jogador FOREIGN KEY (id_jogador) REFERENCES jogador(id_jogador) -> criamos a chave estranjeira, repare que o id_jogador precisa ser igual nas duas tabelas!!
+
+CONSTRAINT ck_contratado CHECK (data_fim > data_inicio) -> CHECK cria uma validação, aqui se eu tenta inseri uma data fim maior que a data inicio, essa regra barra a gravação no banco
+//----------------------------
+
+
+//----------------------------
+ALTER TABLE jogador RENAME TO jogadores; -> altera o nome da tabela
+//----------------------------
+
+
+//----------------------------
+ALTER TABLE jogador ADD apelido VARCHAR2(30); -> para inserir um novo atributo em uma tabela ja existente
+//----------------------------
+
+
+//----------------------------
+ALTER TABLE jogador RENAME COLUMN apelido TO nickname; -> altera o nome de uma coluna ja existente
+//----------------------------
+
+
+//----------------------------
+DESC jogador; -> mostra a estrutura da tabela (da uma visão sobre ela)
+//----------------------------
+
+
+//----------------------------
+ALTER TABLE jogador MODIFY posicao NUMBER(5,0); -> para alterar um tipo de um atributo ja existente
+//----------------------------
+
+
+//----------------------------
+ALTER TABLE jogador DROP COLUMN bi CASCADE CONSTRAINT; -> exclui um atributo de uma tabela, porém repare no 'cascade', ele vai excluir todas as regras referente a esse atributo tambem.
+//----------------------------
+
+
+//----------------------------
+DROP TABLE jogador; -> excluir uma tabela completa (TOMAR MUITO CUIDADO)
+//----------------------------
+
+//----------------------------
+ALTER TABLE contratado
+DROP CONSTRAINT fk_contratado_ref_jogador; -> caso eu queira excluir a tabela jogador, antes eu preciso remover o relacionamento da tabela contratado com ela, então esse comando fará isso
+//----------------------------
+
+
+//----------------------------
+ALTER TABLE contratado
+ADD CONSTRAINT fk_contratado_ref_jogador FOREIGN KEY (id_jogador) REFERENCES jogador(id_jogador), -> caso eu apaguei ou quero inseri uma nova foreign key eu posso utilizar esse comando
+//----------------------------
+
+
+//----------------------------
+ALTER TABLE contratado
+DISABLE CONSTRAINT fk_contratado_ref_jogador; -> para desabilitar uma foreign key, a regra existe mais ela vai fica desabilitada
+//----------------------------
+
+
+//----------------------------
+ALTER TABLE contratado
+ENABLE CONSTRAINT fk_contratado_ref_jogador; -> para habilitar novamente a foreign key
+//----------------------------
+
+
+
+//----------------------------  AULA 2 ------------------------\\
+
+//----------------------------
+Retornar somente paramentros que eu quero
+SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY
+FROM HR.EMPLOYEES;
+//----------------------------
+
+
+//----------------------------
+WHERE -> Filtragem por id
+SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY, MANAGER_ID
+FROM HR.EMPLOYEES
+WHERE MANAGER_ID IN (101,145,149);
+//----------------------------
+
+
+//----------------------------
+WHERE NOT IN -> vai trazer tudo menos o que eu especificar
+SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY, MANAGER_ID
+FROM HR.EMPLOYEES
+WHERE MANAGER_ID NOT IN (101,145,149);
+//----------------------------
+
+//----------------------------
+LIKE -> pegar todo mundo que começa com a letra 's' o '%' a gente ta falando que nao ta nem ai pro que tiver depois do 's'
+SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY, MANAGER_ID
+FROM HR.EMPLOYEES
+WHERE FIRST_NAME LIKE 'S%';
+//----------------------------
+
+//----------------------------
+LIKE -> '%ma%' todo nome que tive 'ma' nao importa se for no começo ou no fim ele vai puxar
+SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY, MANAGER_ID
+FROM HR.EMPLOYEES
+WHERE FIRST_NAME LIKE '%ma%';
+//----------------------------
+
+//----------------------------
+LIKE -> 'a%' todo nome que tiver o final com a letra a ele vai puxar
+SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY, MANAGER_ID
+FROM HR.EMPLOYEES
+WHERE FIRST_NAME LIKE '%a%';
+//----------------------------
+
+//----------------------------
+NOT LIKE -> 'a%' todo nome que tiver o final com a letra a ele nao vai puxar
+SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY, MANAGER_ID
+FROM HR.EMPLOYEES
+WHERE FIRST_NAME NOT LIKE '%a%';
+//----------------------------
+
+
+//----------------------------
+BETWEEN -> retorna somente o que a gente especificar (exemplo colocamos entre >= 2500 e 5000 <= , então só vai puxar isso)
+SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY, MANAGER_ID
+FROM HR.EMPLOYEES
+WHERE SALARY BETWEEN 2500 AND 5000;
+//----------------------------
+
+//----------------------------
+NOT BETWEEN -> nao retorna o que a gente especificar (exemplo colocamos entre >= 2500 e 5000 <= , então só vai puxar isso)
+SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY, MANAGER_ID
+FROM HR.EMPLOYEES
+WHERE SALARY NOT BETWEEN 2500 AND 5000;
+//----------------------------
+
+
+//----------------------------
+INSERT INTO -> inserir uma row na mano (colocando valores nos parametros)
+INSERT INTO JOGADOR(ID_JOGADOR, NOME, POSICAO, NICKNAME)
+VALUES
+(1, 'JOGADOR', 2, 'JOGADOR NICKNAME')
+//----------------------------
+
+
+//----------------------------
+INSERT INTO -> inserir uma row na mano, to_date para colocar um valor na mao do tipo date
+INSERT INTO CONTRATADO
+(ID_JOGADOR, DATA_INICIO, DATA_FIM)
+VALUES
+(1, TO_DATE('16-02-2023'), TO_DATE('16-02-2023'))
+//----------------------------
+
+//----------------------------
+UPDATE SET -> altera o nome de um parametro (lembre-se sempre de usar junto com where, se nao ele muda todos os registros)
+UPDATE SET 
+NOME = 'JOGADOR NOVO', POSICAO = 5
+WHERE ID_JOGADOR = 1;
+//----------------------------
+
+//----------------------------
+DELETE -> vai deletar um item de um parametro (lembre-se sempre de usar junto com where, se nao ele muda todos os registros)
+DELETE FROM CONTRATADO
+WHERE ID_JOGADOR = 2;
+//----------------------------
+
+
+//----------------------------  AULA 3 ------------------------\\
+
+//----------------------------
+IN -> eu quero saber todos os empregados que estão no departamento 'Marketing e Adminstration'
+(sub query)
+SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, SALARY
+FROM HR.EMPLOYEES
+WHERE DEPARTAMENT_ID IN (SELECT DEPARTMENT_ID FROM HR.DEPARTMENTS
+WHERE DEPARTMENT_NAME IN ('Marketing', 'Administration'))
+//----------------------------
+
+
+//----------------------------
+(decisão)
+//DECODE -> se eu encontrar no job_id a informação 'IT_prog', eu quero que mostre 'programador', se ele encontrar 'FI_ACCOUNT', quero que mostre contator
+//se ele nao achar nada eu coloco um 'VERIFICAR'
+SELECT FIRST_NAME, JOB_ID,
+DECODE(JOB_ID,
+'IT_PROG', 'PROGRAMADOR',
+'FI_ACCOUNT, 'CONTADOR',
+'VERIFICAR') CARGO
+FROM HR.EMPLOYEES;
+//----------------------------
+
+
+//----------------------------
+(decisão)
+CASE -> estrutura de desição 
+SELECT FRIST_NAME, JOB_ID, SALARY,
+CASE 
+   WHEN SALARY < 5000 THEN 'AUMENTO'
+   WHEN SALARY > 10000 THEN 'VERIFICAR'
+   ELSE 'NAO AUMENTAR'
+ END VERIFICAR_AUMENTO
+FROM HR.EMPLOYEES;
+//----------------------------
+
+//----------------------------
+(decisão)
+CASE -> estrutura de desição (para fazer pesquisa na tabela, posso ate por calculos)
+SELECT FRIST_NAME, JOB_ID, SALARY,
+CASE 
+   WHEN SALARY < 5000 THEN SALARY * 1.05
+   WHEN SALARY > 10000 THEN  SALARY * 1.1
+   ELSE SALARY
+ END VERIFICAR_AUMENTO
+FROM HR.EMPLOYEES;
+//----------------------------
+
+
+
+//----------------------------  AULA 4 ------------------------\\
+
+
+//----------------------------
+AVG -> Media 
+SELECT AVG(Salary) FROM HR.EMPLOYEES;
+//----------------------------
+
+//----------------------------
+GROUP BY -> um grupo especifico
+SELECT AVG(Salary) FROM HR.EMPLOYEES
+GROUP BY DEPARTAMENT_ID;
+//----------------------------
+
+//----------------------------
+MAX-> Maior / MIN-> menor
+SELECT AVG(Salary), MAX(Salary), MIN(Salary) FROM HR.EMPLOYEES;
+//----------------------------
+
+
+//----------------------------
+IN -> especificar os id
+SELECT AVG(Salary), MAX(Salary), MIN(Salary) FROM HR.EMPLOYEES
+WHERE DEPARTAMENT_ID IN (10, 20,30)
+GROUP BY DEPARTAMENT_ID;
+//----------------------------
+
+
+//----------------------------
+HAVING -> condição falando se a media salarial for menor ou igual que 5000
+SELECT AVG(Salary), MAX(Salary), MIN(Salary) FROM HR.EMPLOYEES
+WHERE DEPARTAMENT_ID IN (10, 20,30)
+GROUP BY DEPARTAMENT_ID
+HAVING AVG(Salary) <= 5000;
+//----------------------------
+
+
+//----------------------------
+ORDER BY -> ordernar do menor pro maior
+SELECT AVG(Salary), MAX(Salary) FROM HR.EMPLOYEES
+GROUP BY DEPARTMENT_ID
+HAVING MAX(Salary) > 5000
+ORDER BY DEPARTMENT_ID;
+//----------------------------
+
+
+//----------------------------  AULA 5 ------------------------\\
+Cursores e procedures -> PL/SQL (temos condições, estrutura de repetição etc..)
+
+Cursor : Areas compotstas de linhas e colunas em MEMORIA que servem para armazenar o resultado de uma seleção que retorna 0 ou mais linhas.
+posso ir pra frente, pra tras, fazer contas, mandar inserir uma informação em uma determinada tabela...
+declarar, abrir e depois fechar o cursos (porque fica em memoria)
+
+Procedure: subprograma compilado e armazenado no servidor, pode ser chamado por um comando sql qualquer
+
+//IS -> aguardando passar instrução para preencer em memoria
+//V_NOME/V_SALARY -> para ter acesso a informação que foi colocada depois do 'IS' (precisam ser do mesmo tipo que esta na tabela original)
+//V_SALARY HR.EMPLOYEES.SALARY%TYPE; -> se eu nao souber o tipo eu vou la na tabela HR.EMPLOYEES em SALARY e peço o %TYPE ou seja peço o tipo que esta la
+//V_SALARIOTOTAL:=0; -> inicializando a variavel com 0
+//OPEN -> abrindo o cursor ja em memoria
+//LOOP -> percorrer registro a registro
+//FETCH -> da mesma forma que usei isso aqui "SELECT FIRST_NAME, SALARY FROM HR.EMPLOYESS;" pra cria o cursor, eu tenho que usa la no loop, lembrando que eu criei variaveis pra ela
+//EXIT WHEN C_EMPREGADOS%NOTFOUND; -> para o loop quando nao encontrar mais registros
+//END LOOP -> termina o loop
+//DBMS_OUTPUT.PUT_LINE(V_NOME); -> vai mostra o conteudo do V_NOME
+//V_SALARIOTOTAL:=V_SALARIOTOTAL+V_SALARY; -> para eu ver o salario com o cursor ja em cache
+//CLOSE C_EMPREGADOS; -> fecha o cursor
+
+ ---------------------
+| Criando CURSOR: \/  |
+ ---------------------
+
+SET SERVEROUTPUT ON;
+
+DECLARE 
+   CURSOR C_EMPREGADOS IS
+    SELECT FIRST_NAME, SALARY FROM HR.EMPLOYESS;
+
+  V_NOME VARCHAR2(30);
+  V_SALARY HR.EMPLOYEES.SALARY%TYPE;
+  V_SALARIOTOTAL NUMBER(8.2);
+BEGIN
+   V_SALARIOTOTAL:=0;
+   OPEN C_EMPREGADOS;
+
+   LOOP
+     FETCH C_EMPREGADOS INTO V_NOME, V_SALARY
+	DBMS_OUTPUT.PUT_LINE(V_NOME);
+	//agora como ficou em memoria posso criar calculos (assim não precisa fica executando pra consegui o resultado)
+        V_SALARIOTOTAL:=V_SALARIOTOTAL+V_SALARY;
+     EXIT WHEN C_EMPREGADOS%NOTFOUND;
+
+   END LOOP;
+
+	//posso deixa mostrando na tela depois de fecha o cursor
+	DBMS_OUTPUT.PUT_LINE(V_SALARIOTOTAL);
+
+ CLOSE C_EMPREGADOS;
+END;
+
+
+
+ ------------------------
+| Criando PROCEDURE: \/  |
+ ------------------------
+
+//Fica armazenado no banco
+//IN -> parametro de entrada, vai receber uma informação externa (programa que vai fica armazenado dentro do banco) (na pasta que esta a tabela aparece um novo campo informando sobre o "ADD_NOVO_JOGADOR"
+//Create vs Replace -> se o sub-programa ja existir ele usa o replace, se o sub-programa não existir ele usa o create
+
+
+CREATE OR REPLACE PROCEDURE ADD_NOVO_JOGADOR
+(JOGADOR_ID_IN IN NUMBER,
+JOGADOR_NAME_IN IN VARCHAR2,
+JOGADOR_POST_IN IN NUMBER,
+JOGADOR_APELIDO_IN IN VARHAR2)
+IS
+BEGIN
+   INSERT INTO JOGADOR
+   (ID_JOGADOR, NOME, POSICAO, NICKNAME)
+   VALUES
+   (JOGADOR_ID_IN, JOGADOR_NAME_IN, JOGADOR_POST_IN IN, JOGADOR_APELIDO_IN);
+END;
+
+ ------------------------
+| Usando PROCEDURE: \/  |
+ ------------------------
+//EXEC -> vai executar a procedure
+//repare que a procedure voce faz comandos que usa com frequencia, pra nao precisa fica repetindo toda hora (exemplo insert, delete etc..)
+
+EXEC ADD_NOVO_JOGADOR(3,"JOGADOR 3", 99, "INICIANTE);
+
+
+
+
+//----------------------------  AULA 6 ------------------------\\
+Stored Procedure -> Subprograma que é compilado e armazenado no servidor, pode ser chamado de um comando sql qualquer
+Function -> é um bloco pl/sql muito semelhante a uma procedure. O que podemos entender de inicio entre esses dois tipos
+de blocos é que os blocos functions retornam valores e as procedures podem ou não retornar um valor.
+
+Exemplo de criação de procedure:
+
+CREATE OR REPLACE PROCEDURE Nome_Procedure
+	(
+  	 Argumento1 modo Tipo_deDados,
+	 Argumento2 modo Tipo_deDados,
+	 Argumento3 modo Tipo_deDados, )
+IS OU AS
+	 Variaveis locais, constantes,...
+BEGIN
+	 BLoco PL/SQL
+End nome_da_procedure;
+
+
+//Trigger -> Bloco PL/SQL que é associado a um evento especifico, armazenado em um banco de dados e executado sempre que o evento ocorrer.
+//Pl/SQL -> qualquer tipo de erro é tratado como uma exceção (exception), o que significa uma situação que, a principio, não deveria ocorrer durante a execução do seu programa.
+//EXCEPTION -> tratamento de erro
+//DUP_VAL_IN_INDEX -> verifica se a chave duplicada
+//RAISE_APPLICATION_ERROR -> vai devolve o erro 
+//OTHERS -> qualquer erro que tive
+
+CREATE OR REPLACE PROCEDURE ADD_NOVO_JOGADOR
+(JOGADOR_ID_IN IN NUMBER,
+JOGADOR_NAME_IN IN VARCHAR2,
+JOGADOR_POST_IN IN NUMBER,
+JOGADOR_APELIDO_IN IN VARHAR2)
+IS
+BEGIN
+   INSERT INTO JOGADOR
+   (ID_JOGADOR, NOME, POSICAO, NICKNAME)
+   VALUES
+   (JOGADOR_ID_IN, JOGADOR_NAME_IN, JOGADOR_POST_IN IN, JOGADOR_APELIDO_IN);
+
+EXCEPTION
+   WHEN DUP_VAL_IN_INDEX THEN
+    RAISE_APPLICATION_ERROR(-20001, 'CÒDIGO DO JOGADOR DUPLICADO');
+   WHEN OTHERS THEN
+    RAISE_APPLICATION_ERROR(-20002, 'ALGUM ERRO ACONTECEU NA INSERÇÃO DO JOGADOR!');
+END;
+
+
+ ------------------------
+|   Usando TRIGGER: \/   |
+ ------------------------
+
+//GATILHO PARA TODA VEZ QUE UMA INFORMAÇÃO FOR INSERIDA, ALTERADA OU EXCLUIDA NA TABELA DE JOGADOR, ELE GRAVE UMA TABELA DE LOG
+//SYSDATE -> DATA DO SISTEMA OPERACIONAL
+
+CREATE TABLE TB_LOG(
+  DATA_LOG TIMESTAMP DEFAULT SYSDATE,
+  USER_lOG VARCHAR2(30),
+  DESC_lOG VARCHAR2(300)
+);
+
+CREATE OR REPLACE TRIGGER TG_JOGADOR
+ AFTER INSERT OR DELETE OR UPDATE ON JOGADOR
+ FOR EACH ROW
+ ENABLE
+
+ DECLARE
+  V_USER VARCHAR2(30);
+
+ BEGIN  
+  SELECT USER INTO V_USER FROM DUAL;
+  IF INSERTING THEN
+    INSERT INTO TB_LOG(USER_LOG, DESC_LOG) VALUES (V_USER, 'REGISTRO INSERIDO');
+  ELSEIF DELETING THEN
+    INSERT INTO TB_LOG(USER_LOG, DESC_LOG) VALUES (V_USER, 'REGISTRO DELETADO');
+  ELSEIF UPDATING THEN
+    INSERT INTO TB_LOG(USER_LOG, DESC_LOG) VALUES (V_USER, 'REGISTRO ALTERADO');
+  END IF;
+ END;
+
+
+
+ ------------------------
+|  Usando FUNCTION: \/   |
+ ------------------------
+
+
+CREATE OR REPLACE FUNCTION PRIMEIRO_NOME_FUNC
+RETURN VARCHAR2
+IS
+  V_EMP_NOME VARCHAR2(100);
+
+BEGIN
+  SELECT FIRST_NAME INTO V_EMP_NOME
+  FROM HR.EMPLOYEES
+  WHERE EMPLOYEE_ID = 1;
+
+  RETURN V_EMP_NOME;
+END;
+
+//CHAMANDO A FUNÇÃO \/
+SELECT PRIMEIRO_NOME_FUNC FROM DUAL;
